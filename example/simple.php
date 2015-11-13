@@ -5,7 +5,7 @@
  * @datetime: 2015/11/13 20:00
  */
 
-require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'vendor' . 'autoload.php';
+require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
 $loop = React\EventLoop\Factory::create();
 
