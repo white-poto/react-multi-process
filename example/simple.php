@@ -9,7 +9,7 @@ require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR 
 
 $loop = React\EventLoop\Factory::create();
 
-$server = stream_socket_server('tcp://127.0.0.1:8080');
+$server = stream_socket_server('tcp://127.0.0.1:4020');
 stream_set_blocking($server, 0);
 $loop->addReadStream($server, function ($server) use ($loop) {
     $conn = stream_socket_accept($server);
