@@ -1,0 +1,25 @@
+{
+  "name": "jenner/react-multi-process",
+  "description": "",
+  "license": "MIT",
+  "keywords": [
+  ],
+  "version": "0.1",
+  "authors": [
+    {
+      "name": "Jenner",
+      "email": "hypxm@qq.com",
+      "homepage" : "http://www.huyanping.cn"
+    }
+  ],
+  "require": {
+    "php": ">=5.4.0",
+    "jenner/simple_fork": "~1.1",
+    "react/event-loop": "v0.4.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "React\\Multi": "src/"
+    }
+  }
+}
