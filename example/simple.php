@@ -25,5 +25,5 @@ $loop->addReadStream($server, function ($server) use ($loop) {
     });
 });
 
-$master = new \React\Multi\Master($loop);
+$master = new \React\Multi\Master($loop, 1);
 $master->start();
