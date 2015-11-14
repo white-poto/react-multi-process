@@ -19,7 +19,7 @@ $loop->addReadStream($server, function ($server) use ($loop) {
 
         $written = fwrite($conn, $data);
         if ($written === strlen($data)) {
-            usleep(1);
+            usleep(10);
             fclose($conn);
             $loop->removeStream($conn);
         } else {
