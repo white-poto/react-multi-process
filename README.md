@@ -29,7 +29,7 @@ $loop->addReadStream($server, function ($server) use ($loop) {
     });
 });
 
-// 20 is the sub process count
+// the second param is the sub process count
 $master = new \React\Multi\Master($loop, 20);
 $master->start();
 ```
