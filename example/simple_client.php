@@ -4,6 +4,7 @@
  * @license https://opensource.org/licenses/MIT MIT
  * @datetime: 2015/11/13 20:21
  */
+require dirname(__DIR__) . DIRECTORY_SEPARATOR . 'vendor' . DIRECTORY_SEPARATOR . 'autoload.php';
 
 $loop = React\EventLoop\Factory::create();
 
