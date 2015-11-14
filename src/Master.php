@@ -7,7 +7,6 @@
 
 namespace React\Multi;
 
-
 use Jenner\SimpleFork\FixedPool;
 use React\EventLoop\LoopInterface;
 
