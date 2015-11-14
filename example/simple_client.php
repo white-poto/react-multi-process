@@ -13,10 +13,13 @@ $dns = $dnsResolverFactory->createCached('8.8.8.8', $loop);
 
 $connector = new React\SocketClient\Connector($loop, $dns);
 
-$connector->create('127.0.0.1', 4020)->then(function (React\Stream\Stream $stream) use($loop) {
-    $stream->on('data', function($data){
-        echo $data . PHP_EOL;
+for($i=0; $i<100; $i++){
+    $connector->create('127.0.0.1', 4020)->then(function (React\Stream\Stream $stream) use($loop) {
+        $stream->on('data', function($data){
+            echo $data . PHP_EOL;
+        });
     });
-});
+}
+
 
 $loop->run();
