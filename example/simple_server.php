@@ -11,7 +11,6 @@ $loop = React\EventLoop\Factory::create();
 
 $server = stream_socket_server('tcp://127.0.0.1:4020');
 
-sleep(100);
 stream_set_blocking($server, 0);
 $loop->addReadStream($server, function ($server) use ($loop) {
     $conn = stream_socket_accept($server);
