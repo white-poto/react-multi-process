@@ -17,6 +17,7 @@ $loop->addReadStream($server, function ($server) use ($loop) {
     $conn = stream_socket_accept($server);
     $data = "pid:" . getmypid() . PHP_EOL;
     $loop->addWriteStream($conn, function ($conn) use (&$data, $loop) {
+        usleep(10);
         $written = fwrite($conn, $data);
         if ($written === strlen($data)) {
             fclose($conn);
