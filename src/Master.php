@@ -24,6 +24,11 @@ class Master
     protected $count;
 
     /**
+     * @var FixedPool
+     */
+    protected $pool;
+
+    /**
      * @param LoopInterface $loop
      * @param int $count
      */
@@ -35,15 +40,35 @@ class Master
 
     /**
      * start multi loop
+     *
+     * @param bool $block
      */
-    public function start()
+    public function start($block = true)
     {
         $loop = $this->loop;
-        $pool = new FixedPool(function () use ($loop) {
+        $this->loop = new FixedPool(function () use ($loop) {
             $loop->run();
         }, $this->count);
 
-        $pool->start();
-        $pool->keep(true);
+        $this->pool->start();
+        $this->pool->keep($block);
+    }
+
+    /**
+     * keep the sub processes count
+     *
+     * @param bool $block
+     */
+    public function keep($block = false)
+    {
+        $this->pool->keep($block);
+    }
+
+    /**
+     * start new sub processes and shutdown old processes
+     */
+    public function reload()
+    {
+        $this->pool->reload();
     }
 }
