@@ -8,6 +8,12 @@ When we use `react/event-loop` to write async programs, we can not be sure
 that every module is a no-blocking module(sync mysql client...).  
 So we use multi process to improve the performance of our sync program.
 
+Import
+-----------------------------
+```shell
+composer require jenner/react-multi-process
+```
+
 How to use it?
 ----------------------------------
 So simple like:

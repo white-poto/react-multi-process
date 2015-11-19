@@ -1,8 +1,15 @@
 {
   "name": "jenner/react-multi-process",
-  "description": "",
+  "description": "react multi processes support",
   "license": "MIT",
   "keywords": [
+    "react",
+    "reactphp",
+    "react multi",
+    "react process",
+    "reactphp multi",
+    "reactphp process",
+    "react multi processes"
   ],
   "version": "0.1",
   "authors": [
