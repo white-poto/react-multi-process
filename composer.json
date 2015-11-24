@@ -21,7 +21,7 @@
   ],
   "require": {
     "php": ">=5.4.0",
-    "jenner/simple_fork": "~1.1",
+    "jenner/simple_fork": "~1.1.2",
     "react/event-loop": "v0.4.1"
   },
   "require-dev": {

@@ -8,7 +8,6 @@
 
 namespace React\Multi\Socket;
 
-
 use React\EventLoop\Factory;
 use React\Multi\Master;
 

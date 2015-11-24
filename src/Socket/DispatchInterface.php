@@ -8,7 +8,6 @@
 
 namespace React\Multi\Socket;
 
-
 interface DispatchInterface
 {
     /**

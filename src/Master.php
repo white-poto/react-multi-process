@@ -8,7 +8,7 @@
 
 namespace React\Multi;
 
-use Jenner\SimpleFork\FixedPool;
+use Jenner\SimpleFork\ParallelPool;
 use React\EventLoop\LoopInterface;
 
 class Master
@@ -24,7 +24,7 @@ class Master
     protected $count;
 
     /**
-     * @var FixedPool
+     * @var ParallelPool
      */
     protected $pool;
 
@@ -42,16 +42,17 @@ class Master
      * start multi loop
      *
      * @param bool $block
+     * @param int $interval
      */
-    public function start($block = true)
+    public function start($block = true, $interval = 100)
     {
         $loop = $this->loop;
-        $this->loop = new FixedPool(function () use ($loop) {
+        $this->pool = new ParallelPool(function () use ($loop) {
             $loop->run();
         }, $this->count);
 
         $this->pool->start();
-        $this->pool->keep($block);
+        $this->pool->keep($block, $interval);
     }
 
     /**
