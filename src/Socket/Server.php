@@ -10,26 +10,23 @@ namespace React\Multi\Socket;
 
 use React\EventLoop\Factory;
 use React\Multi\Master;
+use React\Multi\Socket\Dispatch\DispatchInterface;
 
 class Server
 {
-    protected $port;
-    protected $host;
-    protected $dispatcher;
+    protected $config;
     protected $handler;
 
-    public function __construct(HandlerInterface $handler, $port = 4020, $host = '0.0.0.0', DispatchInterface $dispatcher = null)
+    public function __construct(ServerConfig $config, HandlerInterface $handler)
     {
-        $this->host = $host;
-        $this->port = $port;
-        $this->dispatcher = $dispatcher;
+        $this->config = $config;
         $this->handler = $handler;
     }
 
     public function start($count = 1)
     {
         $loop = Factory::create();
-        $server = stream_socket_server("tcp://{$this->host}:{$this->port}");
+        $server = stream_socket_server($this->config->getConnectionString());
         if($server === false){
             throw new \RuntimeException("create socket server failed");
         }
@@ -39,10 +36,12 @@ class Server
             throw new \RuntimeException("stream_set_blocking failed");
         }
         $loop->addReadStream($server, function ($server) use ($loop) {
-            if ($this->dispatcher !== null && !$this->dispatcher->enableAccept($loop)) {
+            $dispatcher = $this->config->getDispatcher();
+            if ($dispatcher !== null && !$dispatcher->acquire($server, $loop)) {
                 return;
             }
             $conn = stream_socket_accept($server);
+            $dispatcher->release($server, $loop);
             $loop->addWriteStream($conn, function ($conn) use ($loop) {
                 call_user_func(array($this->handler, 'handle'), $conn, $loop);
             });
