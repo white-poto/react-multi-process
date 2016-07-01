@@ -9,6 +9,7 @@
 namespace React\Multi\Socket\Dispatch;
 
 
+use Jenner\SimpleFork\Lock\FileLock;
 use Jenner\SimpleFork\Lock\Semaphore;
 
 class CompetitionDispatch implements DispatchInterface
@@ -19,11 +20,9 @@ class CompetitionDispatch implements DispatchInterface
     protected $sem;
     protected $lock;
 
-    const REACT_COMPETITION_DISPATCH = "react_competition_dispatch";
-
-    public function __construct()
+    public function __construct($lock_file = "/tmp/react-multi-process.lock")
     {
-        $this->sem = Semaphore::create(self::REACT_COMPETITION_DISPATCH);
+        $this->sem = FileLock::create($lock_file);
     }
 
     public function acquire($server, $loop)
