@@ -20,8 +20,11 @@ class Handler implements \React\Multi\Socket\HandlerInterface {
      */
     public function handle($conn, \React\EventLoop\LoopInterface $loop)
     {
-        var_dump(fread($conn, 1));
-        fwrite($conn, 'dddd');
+        var_dump(fread($conn, 1024));
+        fwrite($conn, "HTTP/1.1 200 OK
+Server: GitHub.com
+Date: Fri, 01 Jul 2016 03:38:21 GMT
+Content-Type: text/html; charset=utf-8\r\n\r\n");
     }
 }
 
