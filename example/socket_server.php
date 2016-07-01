@@ -21,7 +21,7 @@ class Handler implements \React\Multi\Socket\HandlerInterface {
     public function handle($conn, \React\EventLoop\LoopInterface $loop)
     {
         var_dump(fread($conn));
-
+        fwrite($conn, 'dddd');
     }
 }
 
