@@ -45,6 +45,9 @@ class Server
             $loop->addWriteStream($conn, function ($conn) use ($loop) {
                 call_user_func(array($this->handler, 'handle'), $conn, $loop);
             });
+            $loop->addReadStream($conn, function($conn) use ($loop) {
+                var_dump(fread($conn, 1024));
+            });
         });
 
         $master = new Master($loop, $count);
