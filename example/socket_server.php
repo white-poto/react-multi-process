@@ -20,7 +20,7 @@ class Handler implements \React\Multi\Socket\HandlerInterface {
      */
     public function handle($conn, \React\EventLoop\LoopInterface $loop)
     {
-        var_dump(fread($conn, 1024));
+        var_dump(getmygid() . ":" . fread($conn, 1024));
         fwrite($conn, "HTTP/1.1 200 OK
 Server: GitHub.com
 Date: Fri, 01 Jul 2016 03:38:21 GMT
@@ -33,4 +33,4 @@ $config->setDispatcher(new \React\Multi\Socket\Dispatch\CompetitionDispatch());
 
 
 $server = new \React\Multi\Socket\Server($config, new Handler());
-$server->start();
+$server->start(10);
