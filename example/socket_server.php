@@ -33,4 +33,4 @@ $config->setDispatcher(new \React\Multi\Socket\Dispatch\CompetitionDispatch());
 
 
 $server = new \React\Multi\Socket\Server($config, new Handler());
-$server->start(10);
+$server->start(1);
