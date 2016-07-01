@@ -17,6 +17,7 @@ for($i=0; $i<1000; $i++){
     $connector->create('127.0.0.1', 4020)->then(function (React\Stream\Stream $stream) use($loop) {
         $stream->on('data', function($data) use($stream){
             $stream->write("client");
+            $stream->end();
             echo $data;
         });
     });
