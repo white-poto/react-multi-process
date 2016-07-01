@@ -22,6 +22,12 @@ class CompetitionDispatch implements DispatchInterface
 
     public function __construct($lock_file = "/tmp/react-multi-process.lock")
     {
+        if(!file_exists($lock_file)) {
+            $touch = touch($lock_file);
+            if($touch === false) {
+                throw new \RuntimeException("create lock file failed");
+            }
+        }
         $this->sem = FileLock::create($lock_file);
     }
 
