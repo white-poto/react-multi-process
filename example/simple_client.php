@@ -13,9 +13,12 @@ $dns = $dnsResolverFactory->createCached('8.8.8.8', $loop);
 
 $connector = new React\SocketClient\Connector($loop, $dns);
 
-for($i=0; $i<1000; $i++){
+for($i=0; $i<10; $i++){
     $connector->create('127.0.0.1', 4020)->then(function (React\Stream\Stream $stream) use($loop) {
-        $stream->write("clientddddddddddddddddddddddddddddddddddddddddddd");
+        $stream->write("GET /reactphp/event-loop/blob/master/src/LibEventLoop.php HTTP/1.1
+Host: github.com
+Connection: keep-alive
+Cache-Control: max-age=0\r\n\r\n");
         $stream->end();
         $stream->on('data', function($data) use($stream){
             echo $data;
