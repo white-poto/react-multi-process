@@ -26,6 +26,7 @@ class Handler implements \React\Multi\Socket\HandlerInterface {
 }
 
 $config = new \React\Multi\Socket\ServerConfig();
+$config->setDispatcher(new \React\Multi\Socket\Dispatch\CompetitionDispatch());
 
 
 $server = new \React\Multi\Socket\Server($config, new Handler());
