@@ -15,7 +15,8 @@ $connector = new React\SocketClient\Connector($loop, $dns);
 
 for($i=0; $i<1000; $i++){
     $connector->create('127.0.0.1', 4020)->then(function (React\Stream\Stream $stream) use($loop) {
-        $stream->on('data', function($data){
+        $stream->on('data', function($data) use($stream){
+            $stream->write("client");
             echo $data;
         });
     });
